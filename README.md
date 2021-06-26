@@ -1,4 +1,4 @@
-# mingify
+# Mingify
 
 URL minification service built on Appier.
 
