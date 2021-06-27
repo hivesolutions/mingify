@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import binascii
+
 import appier
-import appier_extras
 
 from . import base
 
@@ -10,6 +11,7 @@ class Link(base.MingifyBase):
 
     url = appier.field(
         index = True,
+        meta = "url",
         description = "URL"
     )
 
@@ -17,17 +19,18 @@ class Link(base.MingifyBase):
         index = True
     )
 
+    sequence = appier.field(
+        type = int,
+        index = "all",
+        increment = True
+    )
+
     @classmethod
     def validate(cls):
         return super(Link, cls).validate() + [
             appier.not_null("url"),
             appier.not_empty("url"),
-
-            appier.not_null("hash"),
-            appier.not_empty("hash"),
-            appier.not_duplicate("hash", cls._name())
         ]
-
 
     @classmethod
     def list_names(cls):
@@ -48,5 +51,15 @@ class Link(base.MingifyBase):
     )
     def create_link_s(cls, url, hash = None):
         link = cls(url = url)
-        if not hash: link.hash = "asdd"
+        if hash: link.hash = hash
+        link.save()
         return link
+
+    def post_create(self):
+        base.MingifyBase.post_create(self)
+        if not self.hash:
+            sequence_s = "%d" % self.sequence
+            sequence_s = appier.legacy.bytes(sequence_s)
+            sequence_h = binascii.hexlify(sequence_s)
+            self.hash = appier.legacy.str(sequence_h)
+            self.save()
