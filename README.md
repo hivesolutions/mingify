@@ -1,6 +1,6 @@
 # Mingify
 
-URL minification service built on Appier.
+URL minification service built on [Appier](https://appier.hive.pt).
 
 ## Features
 
