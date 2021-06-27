@@ -16,6 +16,15 @@ class MingifyApp(appier.WebApp):
             *args, **kwargs
         )
 
+    def _version(self):
+        return "0.1.0"
+
+    def _description(self):
+        return "Mingify"
+
+    def _observations(self):
+        return "Simple URL minification service"
+
 if __name__ == "__main__":
     app = MingifyApp()
     app.serve()
