@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Initial working support for email notifications (Notification API) - [#4](https://github.com/ripe-tech/ripe-id/issues/4)
+*
 
 ### Changed
 
@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.1.1] - 2021-06-28
+
+### Fixed
+
+* Small fix in documentation
 
 ## [0.1.0] - 2021-06-25
 
